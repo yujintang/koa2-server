@@ -1,0 +1,30 @@
+{
+  "name": "quehui_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --harmony-async-await index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yujintang/quehui_server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yujintang/quehui_server/issues"
+  },
+  "homepage": "https://github.com/yujintang/quehui_server#readme",
+  "dependencies": {
+    "koa": "^2.0.0-alpha.7",
+    "koa-bodyparser": "^3.2.0",
+    "koa-logger": "^1.3.1",
+    "koa-redis": "^2.1.3",
+    "koa-router": "^7.0.1",
+    "koa-session-minimal": "^3.0.3",
+    "log4js": "^1.1.0",
+    "mongoose": "^4.8.1"
+  }
+}
