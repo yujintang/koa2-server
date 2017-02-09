@@ -4,12 +4,12 @@
  
  
 const mongoose = require('mongoose');
+const cfg_mongo = global.config.mongo;
+const log = global.log;
+
 mongoose.Promise = global.Promise;
 
-var cfg_mongo = require('../config').mongo;
-var log = global.log;
-
-var uri = `mongodb://${cfg_mongo.host}:${cfg_mongo.port}/${cfg_mongo.db}`;
+const uri = `mongodb://${cfg_mongo.host}:${cfg_mongo.port}/${cfg_mongo.db}`;
 mongoose.connect(uri);
 
 var db = mongoose.connection;
@@ -18,5 +18,7 @@ db.on('connected', () => {
 });
 db.on('error', (err) => {
     log.system.error('Mongoose connection error: ' + err);
+    process.exit(1);
 });
+
 global.mongo = mongoose;

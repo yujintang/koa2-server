@@ -6,10 +6,14 @@
 
 "use strict";
 let redisDb = function () {
-    let redis = require('redis');
-    let config = require('../config');
-    var cfg_rds = config.redis;
-    
+
+    const redis = require('redis');
+    const bluebird = require('bluebird')
+    const cfg_rds = global.config.redis;
+
+    bluebird.promisifyAll(redis.RedisClient.prototype);
+    bluebird.promisifyAll(redis.Multi.prototype);
+
     const db = redis.createClient({
         host: cfg_rds.host,
         port: cfg_rds.port,

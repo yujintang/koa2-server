@@ -4,15 +4,16 @@
 
 'use strict';
 
-module.exports = function () {
-    var log4js = require('log4js'),
-        config = require('../config'),
+var log4js = function () {
+
+    const log4js = require('log4js'),
+        cfg_path = global.config.path,
         fs = require('fs'),
         path = require('path');
 
     // trace debug  info  warn  error  fatal //
 
-    const log_path = path.resolve(process.cwd(), config.path.log_path);
+    const log_path = path.resolve(process.cwd(), cfg_path.log_path);
 
     fs.existsSync(log_path) || fs.mkdirSync(log_path); //验证是否存在该目录
 
@@ -61,6 +62,9 @@ module.exports = function () {
         }
     });
 
-    global.log = logger_export;
     return logger_export;
 }();
+
+global.log = log4js;
+
+module.exports = log4js;

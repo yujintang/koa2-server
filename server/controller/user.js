@@ -1,12 +1,11 @@
 /**
  * Created by yujintang on 2017/2/7.
  */
-
-
 'use strict';
 
 var Model = require('../model');
 var Result = global.Result;
+var redis = global.redisDb;
 
 
 /**
@@ -22,6 +21,7 @@ exports.register = async (ctx) =>{
         password: body.password
     };
     let x = await Model.user.create(model);
+    let y = await redis.getAsync("qq");
 
-    ctx.body = new Result(Result.OK, void 0, x);
+    ctx.body = new Result(Result.OK, void 0, {info: x, redis: y});
 };

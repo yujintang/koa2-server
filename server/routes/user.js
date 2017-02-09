@@ -4,9 +4,9 @@
 
 "use strict";
 
-let router = require('koa-router')();
-let redisDb = global.redisDb;
-let ctUser = require('../controller/user');
+const router = require('koa-router')();
+const redisDb = global.redisDb;
+const ctUser = require('../controller/user');
 
 /**
  * 登录
