@@ -12,6 +12,13 @@ const configure = function () {
             break;
         case 'real':
             port = 3000;
+            redisHost = '127.0.0.1';
+            redisPort = '6379';
+            redisDb = 1;
+            mongoHost = '127.0.0.1';
+            mongoPort = '27017';
+            mongoDb = '7diary';
+
             break;
         default:
             port = 12121;
