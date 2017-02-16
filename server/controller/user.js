@@ -23,5 +23,7 @@ exports.register = async (ctx) =>{
     let x = await Model.user.create(model);
     let y = await redis.getAsync("qq");
 
+    console.log(process.cwd())
+    console.log(__dirname)
     ctx.body = new Result(Result.OK, void 0, {info: x, redis: y});
 };

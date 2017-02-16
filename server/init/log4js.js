@@ -13,9 +13,8 @@ var log4js = function () {
 
     // trace debug  info  warn  error  fatal //
 
-    const log_path = path.resolve(process.cwd(), cfg_path.log_path);
-
-    fs.existsSync(log_path) || fs.mkdirSync(log_path); //验证是否存在该目录
+    const log_path = cfg_path.log_path;
+    
 
     var appenders = [
         {

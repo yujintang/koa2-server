@@ -2,7 +2,11 @@
 
 const configure = function () {
 
+    const path = require('path');
+    const fs = require('fs');
+
     var port,
+        PROJECT_NAME = 'quehui',
         mongoHost, mongoPort, mongoDb, mongoName, mongoPassword,
         redisHost, redisPort, redisDb, redisName, redisPassword;
 
@@ -35,7 +39,8 @@ const configure = function () {
 
         system: {
             port: process.env.PORT || port,
-            cookieKey: 'koa project'
+            cookieKey: 'koa project',
+            PROJECT_NAME: PROJECT_NAME
         },
         redis: {
             host: redisHost,
@@ -52,9 +57,22 @@ const configure = function () {
             pass: mongoPassword
         },
         path: {
-            log_path: 'logs'
+            log_path: path.resolve(process.cwd(), 'logs'),
+            upload: path.resolve(process.cwd(), 'upload'),
+        },
+        qiniu:{
+            AK: 'FHrANcgNs9aPtgFlAlbTO3IX1A8s0XH8mLr2z9Kj',
+            SK: '_y8gu3WR8J9qs63x8eKgSJyQteJp1xy_bG3YOmSd',
+            bucket: PROJECT_NAME
         }
     };
+
+    //目录不存在，则创建
+    let keys = Object.keys(config.path);
+    keys.forEach( key => {
+        let temp_path = config.path[key];
+        fs.existsSync(temp_path) || fs.mkdirSync(temp_path)
+    })
 
     return config;
 

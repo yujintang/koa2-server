@@ -8,7 +8,7 @@
 let redisDb = function () {
 
     const redis = require('redis');
-    const bluebird = require('bluebird')
+    const bluebird = require('bluebird');
     const cfg_rds = global.config.redis;
 
     bluebird.promisifyAll(redis.RedisClient.prototype);

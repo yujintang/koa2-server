@@ -8,7 +8,7 @@ const router = require('koa-router')();
 /**
  * 主页
  */
-router.get('/', async (ctx, next) => {
+router.all('/', async (ctx, next) => {
     ctx.body = '却回公司API主页';
 });
 
