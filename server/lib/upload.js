@@ -16,6 +16,10 @@ exports.upload = async(ctx) => {
 
     let files = ctx.request.files;
     let fields = ctx.request.fields;
+    let type = void 0;
+    if(/^(?:\/upload\/)/.test(ctx.originalUrl)){
+        type = ctx.originalUrl.match(/^(?:\/upload\/(\w+))/)[1];
+    }
 
     //base64转文件
     if ('base64' in fields) {
@@ -35,7 +39,7 @@ exports.upload = async(ctx) => {
         newFile = path.join(cfg_upload, newName);
         fs.renameSync(filePath, newFile);
         fileArray.push(newFile);
-        // qiniu.upload(newName, newFile);
+        qiniu.upload(newName, newFile, type);
     });
 
     ctx.body = new Result(Result.OK, '成功', {array: fileArray});

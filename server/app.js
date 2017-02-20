@@ -36,7 +36,7 @@ process.env.NODE_ENV !== 'real' && app.use(logger());
 
 router.use('/', index.routes(), index.allowedMethods());
 router.use('/user', user.routes(), user.allowedMethods());
-router.post('/upload', upload);
+router.post(/^\/upload(?:\/|$)/, upload);
 app.use(router.routes());
 
 app.listen(cfg_sys.port);

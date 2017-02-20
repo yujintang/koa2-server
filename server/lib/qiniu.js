@@ -17,13 +17,24 @@ module.exports = function () {
      * key: 上传到七牛上的文件名，
      * filePath: 要上传的本地路径
      */
-    qn.upload = function (key, filePath) {
+    qn.upload = function (key, filePath, type) {
 
         //构建上传策略函数，设置回调的url以及需要回调给业务服务器的数据
         function uptoken(bucket, key) {
             var putPolicy = new qiniu.rs.PutPolicy(bucket + ":" + key);
-            putPolicy.callbackUrl = '127.0.0.1:12121';
-            putPolicy.callbackBody = 'filename=$(fname)&filesize=$(fsize)';
+
+            let fops = void 0;
+            switch (type){
+                case 'avatar':
+                    fops = cfg_qiniu.avatar_style;
+                    break;
+                default:
+                    fops = '';
+                    break;
+            }
+            let saveas_key = qiniu.util.urlsafeBase64Encode(bucket+':'+key);
+            fops = fops+'|saveas/'+saveas_key;
+            putPolicy.persistentOps = fops
             return putPolicy.token();
         }
 
@@ -33,15 +44,7 @@ module.exports = function () {
         //构造上传函数
         function uploadFile(uptoken, key, localFile) {
             var extra = new qiniu.io.PutExtra();
-            qiniu.io.putFile(uptoken, key, localFile, extra, function (err, ret) {
-                if (!err) {
-                    // 上传成功， 处理返回值
-                    console.log(ret.hash, ret.key, ret.persistentId);
-                } else {
-                    // 上传失败， 处理返回代码
-                    console.log(err);
-                }
-            });
+            qiniu.io.putFile(uptoken, key, localFile, extra);
         }
 
         //调用uploadFile上传

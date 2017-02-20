@@ -63,7 +63,8 @@ const configure = function () {
         qiniu:{
             AK: 'FHrANcgNs9aPtgFlAlbTO3IX1A8s0XH8mLr2z9Kj',
             SK: '_y8gu3WR8J9qs63x8eKgSJyQteJp1xy_bG3YOmSd',
-            bucket: PROJECT_NAME
+            bucket: PROJECT_NAME,
+            avatar_style: 'imageView2/1/w/200/h/200/interlace/0/q/100'
         }
     };
 
