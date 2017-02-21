@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var Model = require('../model');
+var Mongo = require('../model');
 var Result = global.Result;
 var redis = global.redisDb;
 
@@ -20,7 +20,7 @@ exports.register = async (ctx) =>{
         name: body.name,
         password: body.password
     };
-    let x = await Model.user.create(model);
+    let x = await Mongo.User.create(model);
     let y = await redis.getAsync("qq");
 
     ctx.body = new Result(Result.OK, void 0, {info: x, redis: y});

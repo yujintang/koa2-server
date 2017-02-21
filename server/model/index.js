@@ -3,10 +3,12 @@
  */
 
 
-var user = require('./user');
-var file = require('./child/file');
+var User = require('./child/user');
+var File = require('./child/file');
+var Company = require('./child/company');
 
 module.exports = {
-   user,
-   file
+   User,
+   File,
+   Company
 }

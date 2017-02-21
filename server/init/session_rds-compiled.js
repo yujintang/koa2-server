@@ -18,5 +18,3 @@ exports.opt_rds = {
         signed: true
     })
 };
-
-//# sourceMappingURL=session_rds-compiled.js.map

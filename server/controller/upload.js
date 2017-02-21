@@ -12,7 +12,7 @@ exports.upload = async(ctx) => {
         Result = global.Result,
         log = global.log;
     let qiniu = require('../lib/qiniu');
-    let Model = require('../model');
+    let Mongo = require('../model');
     let cfg_upload = global.config.path.upload;
 
     let files = ctx.request.files;
@@ -48,7 +48,7 @@ exports.upload = async(ctx) => {
         };
         try {
             await qiniu.upload(new_name, path, route_param);
-            let m_file = await Model.file.create(model);
+            let m_file = await Mongo.File.create(model);
             result.push(m_file);
         } catch (e) {
             log.db.error(e);
