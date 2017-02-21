@@ -4,7 +4,9 @@
 
 
 var user = require('./user');
+var file = require('./child/file');
 
 module.exports = {
-   user
+   user,
+   file
 }

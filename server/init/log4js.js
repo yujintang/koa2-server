@@ -26,7 +26,7 @@ var log4js = function () {
             pattern: '-yyyy-MM-dd',
             alwaysIncludePattern: true, // 文件名是否始终包含占位符
             category: 'db', //db操作时打印的日志
-            level: 'ERROR'
+            level: 'ALL'
         },
         {
             type: 'dateFile',
@@ -41,7 +41,7 @@ var log4js = function () {
             filename: path.resolve(log_path, 'system.log'),
             pattern: '-yyyy-MM-dd',
             alwaysIncludePattern: true,
-            category: 'system', //用户操作记录
+            category: 'system', //系统问题
             level: 'ALL'
         }
     ];
@@ -65,5 +65,4 @@ var log4js = function () {
 }();
 
 global.log = log4js;
-
 module.exports = log4js;

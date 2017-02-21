@@ -10,14 +10,17 @@ module.exports = function () {
     qiniu.conf.ACCESS_KEY = cfg_qiniu.AK;
     qiniu.conf.SECRET_KEY = cfg_qiniu.SK;
     let bucket = cfg_qiniu.bucket;
+    const bluebird = require('bluebird');
+    bluebird.promisifyAll(qiniu.io);
 
     let qn = {};
 
     /**
      * key: 上传到七牛上的文件名，
-     * filePath: 要上传的本地路径
+     * filePath: 要上传的本地路径,
+     * type: 图片处理类型
      */
-    qn.upload = function (key, filePath, type) {
+    qn.upload = async function (key, filePath, type) {
 
         //构建上传策略函数，设置回调的url以及需要回调给业务服务器的数据
         function uptoken(bucket, key) {
@@ -34,21 +37,14 @@ module.exports = function () {
             }
             let saveas_key = qiniu.util.urlsafeBase64Encode(bucket+':'+key);
             fops = fops+'|saveas/'+saveas_key;
-            putPolicy.persistentOps = fops
+            putPolicy.persistentOps = fops;
             return putPolicy.token();
         }
 
         //生成上传 Token
         let token = uptoken(bucket, key);
-
-        //构造上传函数
-        function uploadFile(uptoken, key, localFile) {
-            var extra = new qiniu.io.PutExtra();
-            qiniu.io.putFile(uptoken, key, localFile, extra);
-        }
-
-        //调用uploadFile上传
-        uploadFile(token, key, filePath);
+        var extra = new qiniu.io.PutExtra();
+        return qiniu.io.putFileAsync(token, key, filePath, extra);
     };
     return qn;
 }();

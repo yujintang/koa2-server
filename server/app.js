@@ -23,7 +23,7 @@ var cfg_sys = config.system;
 var opt_rds = require('./init/session_rds').opt_rds;
 var index = require('./routes/index');
 var user = require('./routes/user');
-var upload = require('./lib/upload').upload;
+var upload = require('./controller/upload').upload;
 var form = require('./init/formidable');
 
 app.keys = [cfg_sys.cookieKey];
