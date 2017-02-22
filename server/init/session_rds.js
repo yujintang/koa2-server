@@ -11,7 +11,8 @@ exports.opt_rds = {
     store: redisStore({
         host: cfg_rds.host,
         port: cfg_rds.port,
-        db: cfg_rds.db
+        db: cfg_rds.db,
+        password: cfg_rds.pass
     }),
     cookie: ctx =>({
         maxAge: ctx.session.user ? maxAge : 0,

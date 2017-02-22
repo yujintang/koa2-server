@@ -8,14 +8,14 @@ const configure = function () {
     var port,
         PROJECT_NAME = 'quehui',
         mongoHost, mongoPort, mongoDb, mongoName, mongoPassword,
-        redisHost, redisPort, redisDb, redisName, redisPassword;
+        redisHost, redisPort, redisDb, redisPassword;
 
     switch (process.env.NODE_ENV) {
         case 'dev':
             port = 12312;
             break;
         case 'real':
-            port = 3000;
+            port = 12121;
             redisHost = '127.0.0.1';
             redisPort = '6379';
             redisDb = 1;
@@ -26,11 +26,14 @@ const configure = function () {
             break;
         default:
             port = 12121;
-            redisHost = '127.0.0.1';
+            redisHost = '120.27.115.24';
             redisPort = '6379';
+            redisPassword = 'redis';
             redisDb = 1;
-            mongoHost = '127.0.0.1';
+            mongoHost = '120.27.115.24';
             mongoPort = '27017';
+            mongoName = 'quehui';
+            mongoPassword = 'mongo';
             mongoDb = '7diary';
             break;
     }
@@ -46,7 +49,6 @@ const configure = function () {
             host: redisHost,
             port: redisPort,
             db: redisDb,
-            user: redisName,
             pass: redisPassword
         },
         mongo: {
