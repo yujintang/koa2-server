@@ -12,16 +12,21 @@ var redis = global.redisDb;
  * 注册用户
  */
 
-exports.register = async (ctx) =>{
+exports.register = async(ctx) => {
 
-    let body = ctx.request.body;
-    let model = {
-        account: body.account,
-        name: body.name,
-        password: body.password
-    };
-    let x = await Mongo.User.create(model);
-    let y = await redis.getAsync("qq");
-
-    ctx.body = new Result(Result.OK, void 0, {info: x, redis: y});
+    try {
+        let body = ctx.request.fields;
+        let {account, name, password} = body;
+        ctx.session.qh = 'qwe';
+        let model = {
+            account: body.account,
+            name: body.name,
+            password: body.password
+        };
+        let x = await Mongo.User.create(model);
+        let y = await redis.setAsync("qq", x);
+        ctx.body = new Result(Result.OK, void 0, {info: x, redis: y});
+    } catch (e) {
+        return ctx.body = new Result(Result.ERROR, '失败', e)
+    }
 };

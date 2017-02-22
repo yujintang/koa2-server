@@ -24,7 +24,6 @@ let redisDb = function () {
     });
 
     return db;
-
 }();
 
 global.redisDb = redisDb;

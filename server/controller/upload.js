@@ -15,47 +15,47 @@ exports.upload = async(ctx) => {
     let Mongo = require('../model');
     let cfg_upload = global.config.path.upload;
 
-    let files = ctx.request.files;
-    let fields = ctx.request.fields;
-    let route_param = void 0;
-    if (/^(?:\/upload\/)/.test(ctx.originalUrl)) {
-        route_param = ctx.originalUrl.match(/^(?:\/upload\/(\w+))/)[1];
-    }
+    try {
+        let files = ctx.request.files;
+        let fields = ctx.request.fields;
+        let route_param = void 0;
+        if (/^(?:\/upload\/)/.test(ctx.originalUrl)) {
+            route_param = ctx.originalUrl.match(/^(?:\/upload\/(\w+))/)[1];
+        }
 
-    //base64转文件
-    if ('base64' in fields) {
-        var base64File = fields.base64;
-        let file = base64ToFiles(base64File, cfg_upload);
-        files.push(file);
-        fields.base64 = null;
-    }
+        //base64转文件
+        if ('base64' in fields) {
+            var base64File = fields.base64;
+            let file = base64ToFiles(base64File, cfg_upload);
+            files.push(file);
+            fields.base64 = null;
+        }
 
-    let result = [];
+        let result = [];
 
-    let keys = Object.keys(files);
-    for (let key in keys) {
-        let {name, path, type} = files[key];
-        var file_ext = path.substring(path.lastIndexOf('.'));
-        let new_name = crypto.UUID() + file_ext;
+        let keys = Object.keys(files);
+        for (let key in keys) {
+            let {name, path, type} = files[key];
+            var file_ext = path.substring(path.lastIndexOf('.'));
+            let new_name = crypto.UUID() + file_ext;
 
-        let model = {
-            name: name,
-            user: '',
-            type: type,
-            param: route_param,
-            url_local: path,
-            url_qiniu: global.config.qiniu.domain_url + new_name
-        };
-        try {
+            let model = {
+                name: name,
+                user: '',
+                type: type,
+                param: route_param,
+                url_local: path,
+                url_qiniu: global.config.qiniu.domain_url + new_name
+            };
             await qiniu.upload(new_name, path, route_param);
             let m_file = await Mongo.File.create(model);
             result.push(m_file);
-        } catch (e) {
-            log.db.error(e);
-            return ctx.body = new Result(Result.ERROR, '失败');
         }
+        ctx.body = new Result(Result.OK, '成功', {list: result});
+    } catch (e) {
+        log.db.error(e);
+        return ctx.body = new Result(Result.ERROR, '失败', e);
     }
-    ctx.body = new Result(Result.OK, '成功', {list: result});
 
 
     /**
