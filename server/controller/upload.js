@@ -8,9 +8,7 @@ exports.upload = async(ctx) => {
 
     const formidable = require('formidable'),
         fs = require('fs'),
-        crypto = require('../lib/crypto'),
-        Result = global.Result,
-        log = global.log;
+        crypto = require('../lib/crypto');
     let qiniu = require('../lib/qiniu');
     let Mongo = require('../model');
     let cfg_upload = global.config.path.upload;
@@ -54,7 +52,7 @@ exports.upload = async(ctx) => {
         ctx.body = new Result(Result.OK, '成功', {list: result});
     } catch (e) {
         log.db.error(e);
-        return ctx.body = new Result(Result.ERROR, '失败', e);
+        return ctx.body = new Result(Result.ERROR, e.message);
     }
 
 

@@ -17,7 +17,7 @@ exports.register = async(ctx) => {
     try {
         let body = ctx.request.fields;
         let {account, name, password} = body;
-        ctx.session.qh = 'qwe';
+
         let model = {
             account: body.account,
             name: body.name,
@@ -25,8 +25,9 @@ exports.register = async(ctx) => {
         };
         let x = await Mongo.User.create(model);
         let y = await redis.setAsync("qq", x);
+        ctx.session.user = 'qwe';
         ctx.body = new Result(Result.OK, void 0, {info: x, redis: y});
     } catch (e) {
-        return ctx.body = new Result(Result.ERROR, '失败', e)
+        return ctx.body = new Result(Result.ERROR, e.message)
     }
 };

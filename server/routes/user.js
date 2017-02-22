@@ -5,7 +5,6 @@
 "use strict";
 
 const router = require('koa-router')();
-const redisDb = global.redisDb;
 const ctUser = require('../controller/user');
 
 /**

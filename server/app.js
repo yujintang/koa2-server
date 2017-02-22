@@ -25,6 +25,7 @@ var index = require('./routes/index');
 var user = require('./routes/user');
 var upload = require('./controller/upload').upload;
 var form = require('./init/formidable');
+var auth_check = require('./middlewares/auth_check');
 
 app.keys = [cfg_sys.cookieKey];
 app.use(session(opt_rds));
@@ -33,10 +34,10 @@ app.use(body({
 }));
 
 process.env.NODE_ENV !== 'real' && app.use(logger());
-
+app.use(auth_check);
 router.use('/', index.routes(), index.allowedMethods());
 router.use('/user', user.routes(), user.allowedMethods());
-router.post(/^\/upload(?:\/|$)/, upload);
+router.post(/^\/auth_upload(?:\/|$)/, upload);
 app.use(router.routes());
 
 app.listen(cfg_sys.port);

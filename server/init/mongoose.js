@@ -5,7 +5,6 @@
 
 const mongoose = require('mongoose');
 const cfg_mongo = global.config.mongo;
-
 mongoose.Promise = global.Promise;
 
 const opts = {
