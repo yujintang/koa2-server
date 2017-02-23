@@ -1,7 +1,7 @@
 {
   "name": "quehui_server",
   "version": "1.0.0",
-  "description": "",
+  "description": "quehui server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -30,6 +30,7 @@
     "lodash": "^4.17.4",
     "log4js": "^1.1.0",
     "mongoose": "^4.8.1",
+    "nodemailer": "^3.1.3",
     "qiniu": "^6.1.13",
     "uuid": "^3.0.1"
   }

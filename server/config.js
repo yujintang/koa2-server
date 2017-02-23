@@ -62,18 +62,30 @@ const configure = function () {
             log_path: path.resolve(process.cwd(), 'logs'),
             upload: path.resolve(process.cwd(), 'upload'),
         },
-        qiniu:{
+        qiniu: {
             AK: 'FHrANcgNs9aPtgFlAlbTO3IX1A8s0XH8mLr2z9Kj',
             SK: '_y8gu3WR8J9qs63x8eKgSJyQteJp1xy_bG3YOmSd',
             bucket: PROJECT_NAME,
             domain_url: 'http://olcxfktrd.bkt.clouddn.com/',
             avatar_style: 'imageView2/1/w/200/h/200/interlace/0/q/100'
+        },
+        mail: {
+            notice: {
+                host: 'smtp.mxhichina.com',
+                port: 465,
+                secureConnection: true, // 使用 SSL
+                auth: {
+                    user: 'vip@7diary.com',
+                    pass: 'qH1234567'
+                }
+            },
+            supportMail: '546609642@qq.com'
         }
     };
 
     //目录不存在，则创建
     let keys = Object.keys(config.path);
-    keys.forEach( key => {
+    keys.forEach(key => {
         let temp_path = config.path[key];
         fs.existsSync(temp_path) || fs.mkdirSync(temp_path)
     })
