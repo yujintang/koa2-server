@@ -22,7 +22,7 @@ var Result = require('./lib/result');
 var cfg_sys = config.system;
 var opt_rds = require('./init/session_rds').opt_rds;
 var index = require('./routes/index');
-var user = require('./routes/user');
+var auth = require('./routes/auth');
 var upload = require('./controller/upload').upload;
 var form = require('./init/formidable');
 var auth_check = require('./middlewares/auth_check');
@@ -36,7 +36,7 @@ app.use(body({
 process.env.NODE_ENV !== 'real' && app.use(logger());
 app.use(auth_check);
 router.use('/', index.routes(), index.allowedMethods());
-router.use('/user', user.routes(), user.allowedMethods());
+router.use('/auth', auth.routes(), auth.allowedMethods());
 router.post(/^\/auth_upload(?:\/|$)/, upload);
 app.use(router.routes());
 

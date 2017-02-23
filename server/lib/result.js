@@ -13,7 +13,7 @@ var enums = {
 var Result = function (ret, err, content) {
     let base = {
         ret: undefined,
-        err: err,
+        message: err,
         content: content
     };
 

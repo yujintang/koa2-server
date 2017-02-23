@@ -10,7 +10,8 @@ exports.upload = async(ctx) => {
         fs = require('fs'),
         crypto = require('../lib/crypto');
     let qiniu = require('../lib/qiniu');
-    let Mongo = require('../model');
+    let Mongo = require('../model'),
+        Result = require('../lib/result');
     let cfg_upload = global.config.path.upload;
 
     try {
