@@ -15,12 +15,15 @@ const configure = function () {
             port = 12312;
             break;
         case 'real':
-            port = 12121;
+            port = 3000;
             redisHost = '127.0.0.1';
             redisPort = '6379';
+            redisPassword = 'redis';
             redisDb = 0;
             mongoHost = '127.0.0.1';
             mongoPort = '27017';
+            mongoName = 'quehui';
+            mongoPassword = 'mongo';
             mongoDb = '7diary';
 
             break;
