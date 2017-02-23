@@ -81,8 +81,7 @@ const configure = function () {
                     user: 'vip@7diary.com',
                     pass: 'qH1234567'
                 }
-            },
-            supportMail: '546609642@qq.com'
+            }
         }
     };
 
