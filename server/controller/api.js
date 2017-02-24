@@ -38,24 +38,25 @@ exports.sendMail = async(ctx) => {
  * 拉取更新代码
  */
 exports.gitPull = async(ctx) => {
-    
+
     require('shelljs/global');
     try {
-        cd ('/opt');
-        let result = void 0;
-        if(ctx.method == 'GET'){
-            result = ls();
-        }else {
+        cd('/opt');
+        let pull = void 0, pm2 = void 0;
+        if (ctx.method == 'GET') {
+            pull = ls();
+        } else {
             let name = ctx.params.name;
             cd(name);
-            result = exec('./reload.sh');
+            pull = exec('./reload.sh');
+            pm2 = exec(`pm2 restart ${name}`);
         }
-        if(result.stderr){
+        if (result.stderr) {
             throw new Error(result.stderr);
         }
-        ctx.body = new Result(Result.OK, void 0, {data: result})
+        ctx.body = new Result(Result.OK, void 0, {pull: pull, pm2: pm2})
     } catch (e) {
         return ctx.body = new Result(Result.ERROR, e.message);
     }
-    
+
 };
