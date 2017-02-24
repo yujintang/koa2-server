@@ -5,13 +5,6 @@
       "script": "bin/index.js",
       "node_args": "--harmony-async-await",
       "cwd": "../",
-      "watch": true,
-      "ignore_watch":[
-        "node_modules",
-        "logs",
-        "upload",
-        ".git"
-      ],
       "env": {
         "NODE_ENV": "real"
       }
