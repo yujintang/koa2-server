@@ -10,6 +10,7 @@ const router = require('koa-router')();
  */
 router.all('/', async (ctx, next) => {
 
+    console.log('sss')
     ctx.body = '却回公司API主页';
 });
 
