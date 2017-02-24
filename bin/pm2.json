@@ -9,7 +9,8 @@
       "ignore_watch":[
         "node_modules",
         "logs",
-        "upload"
+        "upload",
+        ".git"
       ],
       "env": {
         "NODE_ENV": "real"
