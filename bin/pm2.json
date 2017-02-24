@@ -5,14 +5,12 @@
       "script": "bin/index.js",
       "node_args": "--harmony-async-await",
       "cwd": "../",
-      "watch": [
-        "server"
+      "watch": true,
+      "ignore_watch":[
+        "node_modules",
+        "logs",
+        "upload"
       ],
-      "watch_options": {
-        "persistent": true,
-        "ignoreInitial": true,
-        "usePolling": true
-      },
       "env": {
         "NODE_ENV": "real"
       }
