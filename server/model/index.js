@@ -11,4 +11,5 @@ module.exports = {
    User,
    File,
    Company
-}
+
+};

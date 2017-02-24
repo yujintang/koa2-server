@@ -15,7 +15,7 @@ const _ = require('lodash');
  * 发送通知邮件
  */
 
-exports.sendMail = async (ctx) => {
+exports.sendMail = async(ctx) => {
 
 
     const mail = require('../lib/email');
@@ -23,7 +23,7 @@ exports.sendMail = async (ctx) => {
         let body = ctx.request.fields;
         let {name, email, content} = body;
 
-        if(!email || !content){
+        if (!email || !content) {
             throw new Error('请输入您的邮箱地址和内容')
         }
 
@@ -31,5 +31,30 @@ exports.sendMail = async (ctx) => {
         return ctx.body = new Result(Result.OK, '成功');
     } catch (e) {
         return ctx.body = new Result(Result.ERROR, e.message)
+    }
+};
+
+/**
+ * 拉取更新代码
+ */
+exports.gitPull = async(ctx) => {
+    
+    require('shelljs/global');
+    try {
+        cd ('/opt');
+        let result = void 0;
+        if(ctx.method == 'GET'){
+            result = ls();
+        }else {
+            let name = ctx.params.name;
+            cd(name);
+            result = exec('./reload.sh');
+        }
+        if(result.stderr){
+            throw new Error(result.stderr);
+        }
+        ctx.body = new Result(Result.OK, void 0, {data: result})
+    } catch (e) {
+        return ctx.body = new Result(Result.ERROR, e.message);
     }
 };
