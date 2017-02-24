@@ -1,0 +1,13 @@
+{
+  "apps":[{
+
+    "name": "quehui_server",
+    "script": "index.js",
+    "watch": "true",
+    "node_args": "--harmony-async-await",
+    "cwd": "./",
+    "env":{
+      "NODE_ENV": "real"
+    }
+  }]
+}
