@@ -57,4 +57,5 @@ exports.gitPull = async(ctx) => {
     } catch (e) {
         return ctx.body = new Result(Result.ERROR, e.message);
     }
+    
 };
