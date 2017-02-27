@@ -5,11 +5,11 @@
 
 var User = require('./child/user');
 var File = require('./child/file');
-var Company = require('./child/company');
+var Corp = require('./child/corp');
 
 module.exports = {
    User,
    File,
-   Company
+   Corp
 
 };

@@ -28,7 +28,16 @@ var temp = new Schema({
     manager: {
         type: String
     },
-    phone: {
+    phone: {    
+        type: String
+    },
+    address:{
+        type: String
+    },
+    lng:{
+        type: String
+    },
+    lat:{
         type: String
     },
     status: {

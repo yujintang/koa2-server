@@ -24,7 +24,7 @@ const configure = function () {
             mongoPort = '27017';
             mongoName = 'quehui';
             mongoPassword = 'mongo';
-            mongoDb = '7diary';
+            mongoDb = 'quehui';
 
             break;
         default:
@@ -37,7 +37,7 @@ const configure = function () {
             mongoPort = '27017';
             mongoName = 'quehui';
             mongoPassword = 'mongo';
-            mongoDb = '7diary';
+            mongoDb = 'quehui';
             break;
     }
 

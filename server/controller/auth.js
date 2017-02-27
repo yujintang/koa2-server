@@ -3,9 +3,9 @@
  */
 'use strict';
 
-var Mongo = require('../model');
-var Crypto = require('../lib/crypto');
-var redis = global.redisDb;
+const Mongo = require('../model');
+const Crypto = require('../lib/crypto');
+const redis = global.redisDb;
 
 
 /**

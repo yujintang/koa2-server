@@ -3,12 +3,12 @@
  */
 'use strict';
 
-var Mongo = require('../model');
-var Crypto = require('../lib/crypto');
-var redis = global.redisDb;
-var config = global.config;
-const _ = require('lodash');
-let ck = require('../lib/check');
+const Mongo = require('../model'),
+    Crypto = require('../lib/crypto'),
+    redis = global.redisDb,
+    config = global.config,
+    _ = require('lodash'),
+    ck = require('../lib/check');
 
 /**
  * 发送通知邮件
