@@ -8,7 +8,6 @@ const formidable = require('formidable'),
     crypto = require('../lib/crypto'),
     qiniu = require('../lib/qiniu'),
     Mongo = require('../model'),
-    Result = global.Result,
     cfg_upload = global.config.path.upload;
 
 exports.upload = async(ctx) => {
@@ -49,10 +48,11 @@ exports.upload = async(ctx) => {
             let m_file = await Mongo.File.create(model);
             result.push(m_file);
         }
-        ctx.body = new Result(Result.OK, '成功', {list: result});
+        ctx.body = {list: result};
     } catch (e) {
         log.db.error(e);
-        return ctx.body = new Result(Result.ERROR, e.message);
+        ctx.status = 400;
+        ctx.body = e.message;
     }
 
 

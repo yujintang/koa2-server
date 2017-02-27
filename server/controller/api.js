@@ -4,7 +4,6 @@
 'use strict';
 
 var Mongo = require('../model');
-var Result = global.Result;
 var Crypto = require('../lib/crypto');
 var redis = global.redisDb;
 var config = global.config;
@@ -26,8 +25,9 @@ exports.sendMail = async(ctx) => {
         }
 
         await mail.notice(_.pick(body, ['name', 'email', 'content']));
-        ctx.body = new Result(Result.OK, '成功');
+        ctx.body = {};
     } catch (e) {
-        return ctx.body = new Result(Result.ERROR, e.message)
+        ctx.status = 400;
+        ctx.body = e.message
     }
 };

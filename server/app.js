@@ -18,7 +18,6 @@ var config = require('./config');
 var log = require('./init/log4js');
 var mongo = require('./init/mongoose');
 var redis = require('./init/redis');
-var Result = require('./lib/result');
 var cfg_sys = config.system;
 var opt_rds = require('./init/session_rds').opt_rds;
 var index = require('./routes/index');
@@ -28,6 +27,7 @@ var upload = require('./controller/upload').upload;
 var form = require('./init/formidable');
 var auth_check = require('./middlewares/auth_check');
 var obj_add = require('./middlewares/obj_add');
+var ctx_body = require('./middlewares/ctx_body');
 
 app.keys = [cfg_sys.cookieKey];
 app.use(session(opt_rds));
@@ -35,6 +35,7 @@ app.use(body({
     IncomingForm: form
 }));
 app.use(obj_add);
+app.use(ctx_body);
 
 process.env.NODE_ENV !== 'real' && app.use(logger());
 app.use(auth_check);

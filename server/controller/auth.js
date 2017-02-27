@@ -4,7 +4,6 @@
 'use strict';
 
 var Mongo = require('../model');
-var Result = global.Result;
 var Crypto = require('../lib/crypto');
 var redis = global.redisDb;
 
@@ -32,9 +31,10 @@ exports.register = async(ctx) => {
         let info = await Mongo.User.create(entity);
 
         ctx.session.user = info;
-        ctx.body = new Result(Result.OK, void 0, info);
+        ctx.body = info;
     } catch (e) {
-        return ctx.body = new Result(Result.ERROR, e.message)
+        ctx.status = 400;
+        return ctx.body = e.message
     }
 };
 
@@ -57,9 +57,10 @@ exports.login = async(ctx) => {
         }
 
         ctx.session.user = info;
-        ctx.body = new Result(Result.OK, void 0, info);
+        ctx.body = info;
     } catch (e) {
-        return ctx.body = new Result(Result.ERROR, e.message)
+        ctx.status = 400;
+        return ctx.body = e.message
     }
 };
 
@@ -71,8 +72,9 @@ exports.logout = async(ctx) => {
 
     try {
         ctx.session.user = null;
-        ctx.body = new Result(Result.OK, '成功退出登录');
+        ctx.body = {};
     } catch (e) {
-        return ctx.body = new Result(Result.ERROR, e.message)
+        ctx.status = 400;
+        return ctx.body = e.message
     }
 };

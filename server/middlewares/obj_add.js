@@ -12,6 +12,6 @@ module.exports = async(ctx, next) => {
         await next();
     } catch (e) {
         ctx.status = 500;
-        ctx.body = new Result(Result.ERROR, e.message)
+        ctx.body = e.message
     }
 };
