@@ -15,7 +15,7 @@ var redis = global.redisDb;
 exports.register = async(ctx) => {
 
     try {
-        let body = ctx.request.fields;
+        let body = ctx.fields;
         let {account, password} = body;
         if (!account || !password) {
             throw new Error('缺少参数');
@@ -45,7 +45,7 @@ exports.register = async(ctx) => {
 exports.login = async(ctx) => {
 
     try {
-        let body = ctx.request.fields;
+        let body = ctx.fields;
         let {account, password} = body;
         if (!account || !password) {
             throw new Error('缺少参数');

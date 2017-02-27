@@ -13,8 +13,8 @@ const formidable = require('formidable'),
 exports.upload = async(ctx) => {
     try {
 
-        let files = ctx.request.files;
-        let fields = ctx.request.fields;
+        let files = ctx.files;
+        let fields = ctx.fields;
         let route_param = void 0;
         if (/^(?:\/upload\/)/.test(ctx.originalUrl)) {
             route_param = ctx.originalUrl.match(/^(?:\/upload\/(\w+))/)[1];

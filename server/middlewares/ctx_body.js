@@ -3,6 +3,11 @@
  */
 'use strict';
 
+/**
+ * 统一返回相同格式的Result
+ * @param ctx
+ * @param next
+ */
 module.exports = async(ctx, next) => {
 
     try {

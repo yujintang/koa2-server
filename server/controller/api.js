@@ -17,7 +17,7 @@ const _ = require('lodash');
 exports.sendMail = async(ctx) => {
     try {
         const mail = require('../lib/email');
-        let body = ctx.request.fields;
+        let body = ctx.fields;
         let {name, email, content} = body;
 
         if (!email || !content) {
@@ -27,7 +27,7 @@ exports.sendMail = async(ctx) => {
         await mail.notice(_.pick(body, ['name', 'email', 'content']));
         ctx.body = {};
     } catch (e) {
-        ctx.status = 400;
+        ctx.status = 400
         ctx.body = e.message
     }
 };

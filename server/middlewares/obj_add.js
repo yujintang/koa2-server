@@ -7,8 +7,9 @@
 module.exports = async(ctx, next) => {
 
     try {
-        ctx.request.files = ctx.request.files || {};
-        ctx.request.fields = ctx.request.fields || {};
+        ctx.body = ctx.request.body || {};      //  if buffer or text
+        ctx.files = ctx.request.files || {};    //  if multipart or urlencoded
+        ctx.fields = ctx.request.fields || {};  //  if json
         await next();
     } catch (e) {
         ctx.status = 500;
