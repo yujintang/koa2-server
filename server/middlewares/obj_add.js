@@ -9,7 +9,7 @@
 module.exports = async(ctx, next) => {
 
     try {
-        ctx.body = ctx.request.body || {};      //  if buffer or text
+        ctx.reqbody = ctx.request.body || {};      //  if buffer or text
         ctx.files = ctx.request.files || {};    //  if multipart or urlencoded
         ctx.fields = ctx.request.fields || {};  //  if json
         await next();
