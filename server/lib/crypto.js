@@ -3,10 +3,14 @@
  */
 'use strict';
 
-module.exports = function () {
+/**
+ * 提供各种加解密算法
+ */
 
-    const uuid = require('uuid');
-    const cryptoJs = require('crypto-js');
+const uuid = require('uuid');
+const cryptoJs = require('crypto-js');
+
+module.exports = function () {
 
     let cj = {};
 

@@ -3,14 +3,19 @@
  */
 'use strict';
 
+/**
+ * 七牛的相关接口
+ */
+
+const bluebird = require('bluebird');
+const cfg_qiniu = global.config.qiniu;
+const qiniu = require('qiniu');
+
 module.exports = function () {
 
-    const cfg_qiniu = global.config.qiniu;
-    const qiniu = require('qiniu');
     qiniu.conf.ACCESS_KEY = cfg_qiniu.AK;
     qiniu.conf.SECRET_KEY = cfg_qiniu.SK;
     let bucket = cfg_qiniu.bucket;
-    const bluebird = require('bluebird');
     bluebird.promisifyAll(qiniu.io);
 
     let qn = {};

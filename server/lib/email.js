@@ -3,12 +3,13 @@
  */
 'use strict';
 
-module.exports = function () {
+/**
+ * 邮件发送方法
+ */
+const nodemailer = require('nodemailer');
+const cfg_mail = global.config.mail;
 
-    const nodemailer = require('nodemailer');
-    const cfg_mail = global.config.mail;
-    // const bluebird = require('bluebird');
-    // bluebird.promisifyAll(nodemailer);
+module.exports = function () {
 
     let email = {};
 
@@ -24,8 +25,7 @@ module.exports = function () {
             from: cfg_mail.notice.auth.user,
             to: email,
             subject: '[放心猿]有新的通知',
-            html: `
-                <div style="background: rgba(156, 175, 235, 0.51)">
+            html: `<div style="background: rgba(156, 175, 235, 0.51)">
                     <hr />
                     <p style="text-align:center;">[放心猿]的信</p >
                     <hr />

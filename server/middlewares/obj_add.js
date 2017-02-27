@@ -3,7 +3,9 @@
  */
 'use strict';
 
-//处理koa-better-body 返回undefined 情况
+/**
+ * 处理koa-better-body 返回undefined 情况
+ */
 module.exports = async(ctx, next) => {
 
     try {
