@@ -27,12 +27,14 @@ var api = require('./routes/api');
 var upload = require('./controller/upload').upload;
 var form = require('./init/formidable');
 var auth_check = require('./middlewares/auth_check');
+var obj_add = require('./middlewares/obj_add');
 
 app.keys = [cfg_sys.cookieKey];
 app.use(session(opt_rds));
 app.use(body({
     IncomingForm: form
 }));
+app.use(obj_add);
 
 process.env.NODE_ENV !== 'real' && app.use(logger());
 app.use(auth_check);

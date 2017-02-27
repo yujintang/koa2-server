@@ -30,7 +30,7 @@ exports.register = async(ctx) => {
             password: Crypto.MD5(password)
         };
         let info = await Mongo.User.create(entity);
-        
+
         ctx.session.user = info;
         ctx.body = new Result(Result.OK, void 0, info);
     } catch (e) {
@@ -50,7 +50,7 @@ exports.login = async(ctx) => {
         if (!account || !password) {
             throw new Error('缺少参数');
         }
-        
+
         let info = await Mongo.User.findOne({account: account, password: Crypto.MD5(password)});
         if (!info) {
             throw new Error('该账号不存在');
@@ -70,7 +70,7 @@ exports.login = async(ctx) => {
 exports.logout = async(ctx) => {
 
     try {
-       ctx.session.user = null;
+        ctx.session.user = null;
         ctx.body = new Result(Result.OK, '成功退出登录');
     } catch (e) {
         return ctx.body = new Result(Result.ERROR, e.message)

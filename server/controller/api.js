@@ -16,10 +16,8 @@ const _ = require('lodash');
  */
 
 exports.sendMail = async(ctx) => {
-
-
-    const mail = require('../lib/email');
     try {
+        const mail = require('../lib/email');
         let body = ctx.request.fields;
         let {name, email, content} = body;
 
@@ -28,35 +26,8 @@ exports.sendMail = async(ctx) => {
         }
 
         await mail.notice(_.pick(body, ['name', 'email', 'content']));
-        return ctx.body = new Result(Result.OK, '成功');
+        ctx.body = new Result(Result.OK, '成功');
     } catch (e) {
         return ctx.body = new Result(Result.ERROR, e.message)
     }
-};
-
-/**
- * 拉取更新代码
- */
-exports.gitPull = async(ctx) => {
-
-    require('shelljs/global');
-    try {
-        cd('/opt');
-        let pull = void 0, pm2 = void 0;
-        if (ctx.method == 'GET') {
-            pull = ls();
-        } else {
-            let name = ctx.params.name;
-            cd(name);
-            pull = exec('./reload.sh');
-            pm2 = exec(`pm2 restart ${name}`);
-        }
-        if (result.stderr) {
-            throw new Error(result.stderr);
-        }
-        ctx.body = new Result(Result.OK, void 0, {pull: pull, pm2: pm2})
-    } catch (e) {
-        return ctx.body = new Result(Result.ERROR, e.message);
-    }
-
 };

@@ -12,8 +12,4 @@ const api = require('../controller/api');
  */
 router.post('/sendMail', api.sendMail);
 
-/**
- * 更新代码与重启服务器
- */
-router.all('/auth_gitPull/:name', api.gitPull)
 module.exports = router;

@@ -3,18 +3,17 @@
  */
 'use strict';
 
+const formidable = require('formidable'),
+    fs = require('fs'),
+    crypto = require('../lib/crypto'),
+    qiniu = require('../lib/qiniu'),
+    Mongo = require('../model'),
+    Result = global.Result,
+    cfg_upload = global.config.path.upload;
 
 exports.upload = async(ctx) => {
-
-    const formidable = require('formidable'),
-        fs = require('fs'),
-        crypto = require('../lib/crypto');
-    let qiniu = require('../lib/qiniu');
-    let Mongo = require('../model'),
-        Result = require('../lib/result');
-    let cfg_upload = global.config.path.upload;
-
     try {
+
         let files = ctx.request.files;
         let fields = ctx.request.fields;
         let route_param = void 0;
