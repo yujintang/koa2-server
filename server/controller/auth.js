@@ -6,7 +6,11 @@
 const Mongo = require('../model');
 const Crypto = require('../lib/crypto');
 const redis = global.redisDb;
-
+const https = require('https');
+const Promise = require('bluebird');
+const qs = require('querystring');
+const request = require('request');
+Promise.promisifyAll(request);
 
 /**
  * 注册用户
@@ -55,7 +59,6 @@ exports.login = async(ctx) => {
         if (!info) {
             throw new Error('该账号不存在');
         }
-
         ctx.session.user = info;
         ctx.body = info;
     } catch (e) {
@@ -64,6 +67,59 @@ exports.login = async(ctx) => {
     }
 };
 
+/**
+ * github 登录
+ */
+exports.github = async(ctx) => {
+    try {
+        const cfg_github = global.config.github;
+        let state = Crypto.UUID();
+        ctx.session.state = state;
+        let path = "https://github.com/login/oauth/authorize?" + qs.stringify({
+                client_id: cfg_github.client_id,
+                state: state,
+                redirect_uri: cfg_github.redirect_url
+            });
+        //转发到授权服务器
+        ctx.redirect(path);
+    } catch (e) {
+        ctx.status = 400;
+        return ctx.body = e.message
+    }
+};
+
+/**
+ * github 登录回调
+ */
+exports.githubCb = async(ctx) => {
+    try {
+        const cfg_github = global.config.github;
+
+        let query = ctx.query;
+        let {code, state} = query;
+        if (state != ctx.session.state) {
+            throw new Error('请稍后继续');
+        }
+        let params = {
+            client_id: cfg_github.client_id,
+            client_secret: cfg_github.client_secret,
+            code: code
+        };
+        //获取 access_token
+        let reqTk = await request.postAsync('https://github.com/login/oauth/access_token', {json: params});
+        let access_token = reqTk.body.access_token;
+
+        //获取github user 信息
+        let reqUser = await request.getAsync({
+            headers: {'Authorization': 'token ' + access_token, 'User-Agent': 'request'},
+            url: 'https://api.github.com/user'
+        });
+        ctx.body = reqUser.body;
+    } catch (e) {
+        ctx.status = 400;
+        return ctx.body = e.message
+    }
+};
 /**
  * 登出
  */

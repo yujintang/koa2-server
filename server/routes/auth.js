@@ -22,4 +22,13 @@ router.post('/login', auth.login);
  */
 router.delete('/logout', auth.logout);
 
+/**
+ * github登录
+ */
+router.get('/github', auth.github);
+
+/**
+ * github回调
+ */
+router.all('/githubCb', auth.githubCb);
 module.exports = router;
