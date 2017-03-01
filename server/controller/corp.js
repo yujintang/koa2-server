@@ -12,7 +12,7 @@ const Mongo = require('../model'),
  */
 exports.corpFind = async(ctx) => {
     try {
-        let info = await Mongo.Corp.findOne({status: 1});
+        let info = await Mongo.Corp.findOne();
         if (!info) {
             throw new Error('没有公司信息');
         }
@@ -22,7 +22,6 @@ exports.corpFind = async(ctx) => {
         ctx.body = e.message
     }
 };
-
 
 /**
  * 修改新增公司信息
@@ -34,13 +33,8 @@ exports.corpModify = async(ctx) => {
         ck.params(fields, ['name', 'logo', 'info', 'address', 'email', 'phone']);
         ck.email(email);
         ck.phone(phone);
-        let cp = await Mongo.Corp.findOne({status: 1});
         let entity = _.merge({}, _.pick(fields, ['name', 'logo', 'info', 'email', 'manager', 'phone', 'address', 'lng', 'lat']));
-        if (cp) {
-            ctx.body = await Mongo.Corp.update({_id: cp._id}, entity)
-        } else {
-            ctx.body = await Mongo.Corp.create(entity)
-        }
+        ctx.body = await Mongo.Corp.update({}, entity, {upsert: true});
     } catch (e) {
         ctx.status = 400;
         ctx.body = e.message

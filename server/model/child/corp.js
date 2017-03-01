@@ -49,4 +49,4 @@ var temp = new Schema({
     versionKey: false //控制 __v 的输出
 });
 
-module.exports = mongoose.model('Company', temp);
+module.exports = mongoose.model('Corp', temp);
