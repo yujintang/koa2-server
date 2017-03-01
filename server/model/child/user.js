@@ -6,28 +6,32 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-    account: {
-        type: String,
-        required: true
-    },
+
     name: {
         type: String
     },
+    avatar_url: {
+        type: String
+    },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     email: {
         type: String,
         default: ""
     },
-    vip: {
-        type: Number,
-        default: 0 //vip等级
+    gitHub_id: {
+        type: String
     },
-    status: {
-        type: Number,
-        default: 1 //1:正常 0:关闭 -1:存在异常
+    wx_id: {
+        type: String
+    },
+    location: {
+        type: String
+    },
+    type: {
+        type: String,
+        default: 'user'
     }
 
 }, {
