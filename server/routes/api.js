@@ -7,6 +7,7 @@
 const router = require('koa-router')();
 const api = require('../controller/api');
 const corp = require('../controller/corp');
+const user = require('../controller/user');
 
 /**
  * 发送邮件
@@ -23,5 +24,21 @@ router.get('/corp', corp.corpFind);
  */
 router.post('/corp', corp.corpModify);
 
+
+
+
+/**
+ *  查询所有user
+ */
+router.get('/user', user.find);
+/**
+ * 查询单个user
+ */
+router.get('/user/:id', user.findOne);
+
+/**
+ * user修改
+ */
+router.post('/auth_user/:id', user.modifyOne);
 
 module.exports = router;

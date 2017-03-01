@@ -17,8 +17,10 @@ var UserSchema = new Schema({
         type: String
     },
     email: {
-        type: String,
-        default: ""
+        type: String
+    },
+    phone: {
+        type: String
     },
     gitHub_id: {
         type: String
