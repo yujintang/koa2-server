@@ -15,10 +15,7 @@ exports.upload = async(ctx) => {
 
         let files = ctx.files;
         let fields = ctx.fields;
-        let route_param = void 0;
-        if (/^(?:\/upload\/)/.test(ctx.originalUrl)) {
-            route_param = ctx.originalUrl.match(/^(?:\/upload\/(\w+))/)[1];
-        }
+        let route_param = ctx.query.type; //图片可添加类型，放在url上面  如：?type=avatar
 
         //base64转文件
         if ('base64' in fields) {

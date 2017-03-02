@@ -87,6 +87,10 @@ const configure = function () {
             client_id: '5cfe2b646f07fe4c8b79',
             client_secret: '30d46df6bce48b358218d675f124148b8b1f407f',
             redirect_url: 'http://www.7diary.com/qh/api/auth/githubCb'
+        },
+        https:{
+            key: fs.readFileSync(path.join(__dirname, '../https/privatekey.pem')),
+            cert: fs.readFileSync(path.join(__dirname, '../https/certificate.pem'))
         }
     };
 
