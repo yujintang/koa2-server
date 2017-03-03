@@ -25,9 +25,6 @@ var temp = new Schema({
     detail: {
         type: String  
     },
-    publish_time: {
-        type: String
-    },
     status: {
         type: Number,
         default: 1 //1:正常 0:关闭 -1:存在异常

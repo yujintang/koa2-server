@@ -15,9 +15,6 @@ exports.find = async(ctx) => {
     try {
         let {limit, offset} = ctx.query;
         let info = await Mongo.User.find().limit(+limit || 20).skip(+offset || 0);
-        if (!info) {
-            throw new Error('没有该用户信息');
-        }
         ctx.body = info;
     } catch (e) {
         ctx.status = 400;
@@ -55,9 +52,8 @@ exports.modifyOne = async(ctx) => {
         }
         let fields = ctx.fields;
         let {name, avatar_url, email, location, phone} = fields;
-        ck.params(fields, ['name', 'avatar_url', 'email', 'location', 'phone']);
-        ck.email(email);
-        ck.phone(phone);
+        email && ck.email(email);
+        phone && ck.phone(phone);
         let entity = _.merge({}, _.pick(fields, ['name', 'avatar_url', 'email', 'location', 'phone']));
         ctx.body = await Mongo.Corp.update({_id: id}, entity);
     } catch (e) {

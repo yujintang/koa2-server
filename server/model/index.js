@@ -6,10 +6,12 @@
 var User = require('./child/user');
 var File = require('./child/file');
 var Corp = require('./child/corp');
+var Product = require('./child/product');
 
 module.exports = {
    User,
    File,
-   Corp
+   Corp,
+   Product
 
 };
