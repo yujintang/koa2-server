@@ -7,8 +7,7 @@ const configure = function () {
 
     var port,
         PROJECT_NAME = 'quehui',
-        mongoHost, mongoPort, mongoDb, mongoName, mongoPassword,
-        redisHost, redisPort, redisDb, redisPassword;
+        mongo, redis, github;
 
     switch (process.env.NODE_ENV) {
         case 'dev':
@@ -16,28 +15,47 @@ const configure = function () {
             break;
         case 'real':
             port = 3000;
-            redisHost = '127.0.0.1';
-            redisPort = '6379';
-            redisPassword = 'redis';
-            redisDb = 0;
-            mongoHost = '127.0.0.1';
-            mongoPort = '27017';
-            mongoName = 'quehui';
-            mongoPassword = 'mongo';
-            mongoDb = 'quehui';
-
+            mongo = {
+                host: '127.0.0.1',
+                port: '27017',
+                db: 'quehui',
+                user: 'quehui',
+                pass: 'mongo'
+            };
+            redis = {
+                host: '127.0.0.1',
+                port: '6379',
+                db: 0,
+                pass: 'redis'
+            };
+            github = {
+                client_id: '5cfe2b646f07fe4c8b79',
+                client_secret: '30d46df6bce48b358218d675f124148b8b1f407f',
+                redirect_url: 'http://www.7diary.com/auth/githubCb',
+                home_url: 'http://www.7diary.com/#/home'
+            };
             break;
         default:
             port = 12121;
-            redisHost = '120.27.115.24';
-            redisPort = '6379';
-            redisPassword = 'redis';
-            redisDb = 0;
-            mongoHost = '120.27.115.24';
-            mongoPort = '27017';
-            mongoName = 'quehui';
-            mongoPassword = 'mongo';
-            mongoDb = 'quehui';
+            mongo = {
+                host: '120.27.115.24',
+                port: '27017',
+                db: 'quehui',
+                user: 'quehui',
+                pass: 'mongo'
+            };
+            redis = {
+                host: '120.27.115.24',
+                port: '6379',
+                db: 0,
+                pass: 'redis'
+            };
+            github = {
+                client_id: '180b0603101d0a22aaeb',
+                client_secret: '86a6a16dc1711ae2f7d5a12babb2e3f114c9b4de',
+                redirect_url: 'http://192.168.3.109:8080/qh/auth/githubCb',
+                home_url: 'http://192.168.3.109:8080/#/home'
+            };
             break;
     }
 
@@ -48,19 +66,8 @@ const configure = function () {
             cookieKey: 'koa project',
             PROJECT_NAME: PROJECT_NAME
         },
-        redis: {
-            host: redisHost,
-            port: redisPort,
-            db: redisDb,
-            pass: redisPassword
-        },
-        mongo: {
-            host: mongoHost,
-            port: mongoPort,
-            db: mongoDb,
-            user: mongoName,
-            pass: mongoPassword
-        },
+        redis: redis,
+        mongo: mongo,
         path: {
             log_path: path.resolve(process.cwd(), 'logs'),
             upload: path.resolve(process.cwd(), 'upload'),
@@ -83,13 +90,8 @@ const configure = function () {
                 }
             }
         },
-        github: {
-            client_id: '5cfe2b646f07fe4c8b79',
-            client_secret: '30d46df6bce48b358218d675f124148b8b1f407f',
-            redirect_url: 'http://www.7diary.com/qh/api/auth/githubCb'
-            //redirect_url: 'http://127.0.0.1:12121/auth/githubCb'
-        },
-        https:{
+        github: github,
+        https: {
             key: fs.readFileSync(path.join(__dirname, '../https/privatekey.pem')),
             cert: fs.readFileSync(path.join(__dirname, '../https/certificate.pem'))
         }

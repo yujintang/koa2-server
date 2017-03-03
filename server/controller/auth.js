@@ -98,7 +98,7 @@ exports.githubCb = async(ctx) => {
             let user = await Mongo.User.findOne({gitHub_id: gitHub_id});
             if (user) {
                 session.user = _.pick(user, ['_id']);
-                ctx.body = user
+                ctx.redirect(cfg_github.home_url)
             } else {
 
                 let entity = {
@@ -118,7 +118,7 @@ exports.githubCb = async(ctx) => {
                 throw new Error('该账号已经被绑定');
             } else {
                 let updateUser = await Mongo.User.update({_id: session.user._id}, {gitHub_id: gitHub_id});
-                ctx.body = updateUser;
+                ctx.redirect(cfg_github.home_url)
             }
         }
     } catch (e) {
