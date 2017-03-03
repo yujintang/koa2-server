@@ -114,7 +114,7 @@ exports.githubCb = async(ctx) => {
             }
         } else { //已登录
             let user = await Mongo.User.findOne({gitHub_id: gitHub_id});
-            if (user) {
+            if (user && session.user._id != user._id) {
                 throw new Error('该账号已经被绑定');
             } else {
                 let updateUser = await Mongo.User.update({_id: session.user._id}, {gitHub_id: gitHub_id});
