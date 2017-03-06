@@ -14,7 +14,11 @@ const Mongo = require('../model'),
 exports.find = async(ctx) => {
     try {
         let {limit, offset} = ctx.query;
-        let info = await Mongo.Product.find({status: 1}, {'name':1, 'logo': 1, 'info': 1}).limit(+limit || 20).skip(+offset || 0);
+        let info = await Mongo.Product.find({status: 1}, {
+            'name': 1,
+            'logo': 1,
+            'info': 1
+        }).limit(+limit || 20).skip(+offset || 0);
         ctx.body = info;
     } catch (e) {
         ctx.status = 400;
@@ -73,13 +77,13 @@ exports.modifyOne = async(ctx) => {
 };
 
 /**
- * 删除某个产品
+ * 修改某个产品状态
  */
-exports.delOne = async(ctx) => {
+exports.patchOne = async(ctx) => {
     try {
         let id = ctx.params.id;
-        let entity = {status: 0};
-        ctx.body = await Mongo.Product.update({_id: id}, entity);
+        let product = await Mongo.Product.findById(id, {status: 1});
+        ctx.body = await Mongo.Product.update({_id: id}, {$set: {status: product.status == 1 ? 0 : 1}});
     } catch (e) {
         ctx.status = 400;
         ctx.body = e.message

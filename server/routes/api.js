@@ -37,7 +37,7 @@ router.get('/user', user.find);
 //查询单个user
 router.get('/user/:id', user.findOne);
 //修改单个user
-router.post('/auth_user/:id', user.modifyOne);
+router.put('/auth_user/:id', user.modifyOne);
 
 /**
  *  产品 操作
@@ -49,8 +49,8 @@ router.post('/auth_product', product.newOne);
 //查询单个产品
 router.get('/product/:id', product.findOne);
 //修改单个产品
-router.post('/auth_product/:id', product.modifyOne);
-//删除单个产品
-router.del('/auth_product/:id', product.delOne);
+router.put('/auth_product/:id', product.modifyOne);
+//删除或恢复一个产品
+router.patch('/auth_product/:id', product.patchOne);
 
 module.exports = router;
