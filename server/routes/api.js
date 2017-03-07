@@ -27,7 +27,7 @@ router.post('/auth_upload', upload.upload);
 //查询公司信息
 router.get('/corp', corp.corpFind);
 //修改公司
-router.post('/corp', corp.corpModify);
+router.post('/auth_corp', corp.corpModify);
 
 /**
  *  用户 操作
