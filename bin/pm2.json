@@ -4,7 +4,6 @@
       "name": "quehui_server",
       "script": "bin/index.js",
       "node_args": "--harmony-async-await",
-      "cwd": "../",
       "env": {
         "NODE_ENV": "real"
       }
