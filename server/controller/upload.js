@@ -5,6 +5,8 @@
 
 const formidable = require('formidable'),
     fs = require('fs'),
+    _ = require('lodash'),
+    path = require('path'),
     crypto = require('../lib/crypto'),
     qiniu = require('../lib/qiniu'),
     Mongo = require('../model'),
@@ -18,11 +20,16 @@ exports.upload = async(ctx) => {
         let route_param = ctx.query.type; //图片可添加类型，放在url上面  如：?type=avatar
 
         //base64转文件
-        if ('base64' in fields) {
-            var base64File = fields.base64;
-            let file = base64ToFiles(base64File, cfg_upload);
-            files.push(file);
-            fields.base64 = null;
+        let fieldsKeys = Object.keys(fields);
+        for (let key of fieldsKeys) {
+            let base64 = fields[key];
+            if (_.isArray(base64)) {
+                fields[key] = null
+            } else {
+                let file = base64ToFiles(base64, cfg_upload);
+                files.push(file);
+                fields[key] = null;
+            }
         }
 
         let result = [];

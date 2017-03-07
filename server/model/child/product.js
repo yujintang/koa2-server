@@ -23,7 +23,7 @@ var temp = new Schema({
         type: String
     },
     detail: {
-        type: String  
+        type: String
     },
     status: {
         type: Number,

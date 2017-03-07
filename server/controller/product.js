@@ -49,9 +49,9 @@ exports.newOne = async(ctx) => {
 exports.findOne = async(ctx) => {
     try {
         let id = ctx.params.id;
-        let info = await Mongo.Product.findById(id);
+        let info = await Mongo.Product.findById(id, {status: 0});
         if (!info) {
-            throw new Error('没有该用户信息');
+            throw new Error('没有该产品信息');
         }
         ctx.body = info;
     } catch (e) {
@@ -83,6 +83,9 @@ exports.patchOne = async(ctx) => {
     try {
         let id = ctx.params.id;
         let product = await Mongo.Product.findById(id, {status: 1});
+        if(!product){
+            throw new Error('没有这个产品');
+        }
         ctx.body = await Mongo.Product.update({_id: id}, {$set: {status: product.status == 1 ? 0 : 1}});
     } catch (e) {
         ctx.status = 400;
