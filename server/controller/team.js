@@ -1,5 +1,5 @@
 /**
- * Created by yujintang on 2017/2/27.
+ * Created by yujintang on 2017/3/8.
  */
 'use strict';
 
@@ -8,13 +8,13 @@ const Mongo = require('../model'),
     ck = require('../lib/check');
 
 /**
- * 查询公司信息
+ * 查询团队信息
  */
 exports.find = async(ctx) => {
     try {
-        let info = await Mongo.Corp.findOne();
+        let info = await Mongo.Team.findOne();
         if (!info) {
-            throw new Error('没有公司信息');
+            throw new Error('没有团队信息');
         }
         ctx.body = info;
     } catch (e) {
@@ -24,19 +24,16 @@ exports.find = async(ctx) => {
 };
 
 /**
- * 修改新增公司信息
+ * 修改团队信息
  */
 exports.modify = async(ctx) => {
     try {
         let fields = ctx.fields;
-        let {name, logo, info, address, email, phone} = fields;
-        ck.params(fields, ['name', 'logo', 'info', 'address', 'email', 'phone']);
-        ck.email(email);
-        ck.phone(phone);
-        let entity = _.merge({}, _.pick(fields, ['name', 'logo', 'info', 'email', 'manager', 'phone', 'address', 'lng', 'lat']));
+        let entity = _.merge({}, _.pick(fields, ['history', 'skill', 'member']));
         ctx.body = await Mongo.Corp.update({}, entity, {upsert: true});
     } catch (e) {
         ctx.status = 400;
         ctx.body = e.message
     }
 };
+ 

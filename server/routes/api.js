@@ -7,6 +7,7 @@
 const router = require('koa-router')();
 const email = require('../controller/email');
 const corp = require('../controller/corp');
+const team = require('../controller/team');
 const user = require('../controller/user');
 const product = require('../controller/product');
 const upload = require('../controller/upload');
@@ -25,9 +26,9 @@ router.post('/auth_upload', upload.upload);
  * 公司 操作
  */
 //查询公司信息
-router.get('/corp', corp.corpFind);
+router.get('/corp', corp.find);
 //修改公司
-router.post('/auth_corp', corp.corpModify);
+router.post('/auth_corp', corp.modify);
 
 /**
  *  用户 操作
@@ -52,5 +53,13 @@ router.get('/product/:id', product.findOne);
 router.put('/auth_product/:id', product.modifyOne);
 //删除或恢复一个产品
 router.patch('/auth_product/:id', product.patchOne);
+
+/**
+ *  队伍 介绍
+ */
+//查询队伍信息
+router.get('/team', team.find);
+//修改队伍信息
+router.post('/auth_corp', team.modify);
 
 module.exports = router;
