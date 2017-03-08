@@ -110,7 +110,7 @@ exports.githubCb = async(ctx) => {
                 };
                 let createUser = await Mongo.User.create(entity);
                 session.user = _.omit(createUser, ['_id']);
-                ctx.body = createUser;
+                ctx.redirect(cfg_github.home_url)
             }
         } else { //已登录
             let user = await Mongo.User.findOne({gitHub_id: gitHub_id});
