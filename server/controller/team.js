@@ -30,7 +30,7 @@ exports.modify = async(ctx) => {
     try {
         let fields = ctx.fields;
         let entity = _.merge({}, _.pick(fields, ['history', 'skill', 'member']));
-        ctx.body = await Mongo.Corp.update({}, entity, {upsert: true});
+        ctx.body = await Mongo.Team.update({}, entity, {upsert: true});
     } catch (e) {
         ctx.status = 400;
         ctx.body = e.message

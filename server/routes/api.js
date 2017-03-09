@@ -60,6 +60,6 @@ router.patch('/auth_product/:id', product.patchOne);
 //查询队伍信息
 router.get('/team', team.find);
 //修改队伍信息
-router.post('/auth_corp', team.modify);
+router.post('/auth_team', team.modify);
 
 module.exports = router;
