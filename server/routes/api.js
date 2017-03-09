@@ -11,6 +11,7 @@ const team = require('../controller/team');
 const user = require('../controller/user');
 const product = require('../controller/product');
 const upload = require('../controller/upload');
+const banner = require('../controller/banner');
 
 /**
  * 发送邮件
@@ -61,5 +62,13 @@ router.patch('/auth_product/:id', product.patchOne);
 router.get('/team', team.find);
 //修改队伍信息
 router.post('/auth_team', team.modify);
+
+/**
+ *  背景banner
+ */
+//查询队伍信息
+router.get('/banner', banner.find);
+//修改队伍信息
+router.post('/auth_banner', banner.modify);
 
 module.exports = router;

@@ -8,12 +8,14 @@ var File = require('./child/file');
 var Corp = require('./child/corp');
 var Product = require('./child/product');
 var Team = require('./child/team');
+var Banner = require('./child/banner');
 
 module.exports = {
    User,
    File,
    Corp,
    Product,
-   Team
+   Team,
+   Banner
 
 };
