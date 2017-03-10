@@ -24,7 +24,7 @@ exports.find = async(ctx) => {
 };
 
 /**
- * 修改团队信息
+ * 修改banner信息
  */
 exports.modify = async(ctx) => {
     try {

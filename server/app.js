@@ -49,15 +49,15 @@ https.createServer(config.https, app.callback()).listen(12122);
 log.system.info(((ms) => `Server startup in ${ms} ms, Address: http://localhost:${cfg_sys.port}`)(Date.now() - start_time));
 
 //bind exception event to log
-// process.on('uncaughtException', function (e) {
-//     log.system.error('uncaughtException from process', e);
-// });
-// process.on('unhandledRejection', (e) => {
-//     log.system.warn('unhandledRejection from process', e);
-// });
-// process.on('rejectionHandled', (e) => {
-//     log.system.warn('rejectionHandled from process', e);
-// });
+process.on('uncaughtException', function (e) {
+    log.system.error('uncaughtException from process', e);
+});
+process.on('unhandledRejection', (e) => {
+    log.system.warn('unhandledRejection from process', e);
+});
+process.on('rejectionHandled', (e) => {
+    log.system.warn('rejectionHandled from process', e);
+});
 
 module.exports = app;
 

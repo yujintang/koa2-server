@@ -22,9 +22,6 @@ var temp = new Schema({
     info: {
         type: String
     },
-    detail: {
-        type: String
-    },
     status: {
         type: Number,
         default: 1 //1:正常 0:关闭 -1:存在异常

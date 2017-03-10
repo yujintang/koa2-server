@@ -33,9 +33,9 @@ exports.find = async(ctx) => {
 exports.newOne = async(ctx) => {
     try {
         let fields = ctx.fields;
-        let {name, logo, info, detail} = fields;
-        ck.params(fields, ['name', 'logo', 'info', 'detail']);
-        let entity = _.merge({}, _.pick(fields, ['name', 'logo', 'info', 'detail']));
+        let {name, logo, info} = fields;
+        ck.params(fields, ['name', 'logo', 'info']);
+        let entity = _.merge({}, _.pick(fields, ['name', 'logo', 'info']));
         ctx.body = await Mongo.Product.create(entity);
     } catch (e) {
         ctx.status = 400;
@@ -67,8 +67,7 @@ exports.modifyOne = async(ctx) => {
     try {
         let id = ctx.params.id;
         let fields = ctx.fields;
-        let {name, logo, info, detail} = fields;
-        let entity = _.merge({}, _.pick(fields, ['name', 'logo', 'info', 'detail']));
+        let entity = _.merge({}, _.pick(fields, ['name', 'logo', 'info']));
         ctx.body = await Mongo.Product.update({_id: id}, entity);
     } catch (e) {
         ctx.status = 400;

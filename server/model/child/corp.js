@@ -3,10 +3,6 @@
  */
 'use strict';
 
-/**
- * Created by yujintang on 2017/2/8.
- */
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

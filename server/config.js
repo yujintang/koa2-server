@@ -70,13 +70,13 @@ const configure = function () {
         mongo: mongo,
         path: {
             log_path: path.resolve(process.cwd(), 'logs'),
-            upload: path.resolve(process.cwd(), 'upload'),
+            upload: path.resolve(process.cwd(), 'upload')
         },
         qiniu: {
-            AK: 'FHrANcgNs9aPtgFlAlbTO3IX1A8s0XH8mLr2z9Kj',
-            SK: '_y8gu3WR8J9qs63x8eKgSJyQteJp1xy_bG3YOmSd',
-            bucket: PROJECT_NAME,
-            domain_url: 'http://olcxfktrd.bkt.clouddn.com/',
+            AK: 'UFmgpsHCF5goS2eEk3-CYiTHiF6KOqCqsi4C2R8Y',
+            SK: '40HFTpsLjHpZ-7udjoRbqI-zkiLTIrcf1jJGvAQ8',
+            bucket: '7diary',
+            domain_url: 'http://images.7diary.com/',
             avatar_style: 'imageView2/1/w/200/h/200/interlace/0/q/100'
         },
         mail: {
