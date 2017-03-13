@@ -6,8 +6,8 @@ const configure = function () {
     const fs = require('fs');
 
     var port,
-        PROJECT_NAME = 'quehui',
-        mongo, redis, github;
+        PROJECT_NAME = '**',
+        mongo, redis, github, qq;
 
     switch (process.env.NODE_ENV) {
         case 'dev':
@@ -15,46 +15,32 @@ const configure = function () {
             break;
         case 'real':
             port = 3000;
-            mongo = {
-                host: '127.0.0.1',
-                port: '27017',
-                db: 'quehui',
-                user: 'quehui',
-                pass: 'mongo'
-            };
-            redis = {
-                host: '127.0.0.1',
-                port: '6379',
-                db: 0,
-                pass: 'redis'
-            };
-            github = {
-                client_id: '5cfe2b646f07fe4c8b79',
-                client_secret: '30d46df6bce48b358218d675f124148b8b1f407f',
-                redirect_url: 'http://www.7diary.com/qh_api/auth/githubCb',
-                home_url: 'http://www.7diary.com/qh_back/#/home'
-            };
             break;
         default:
             port = 12121;
             mongo = {
-                host: '120.27.115.24',
-                port: '27017',
-                db: 'quehui',
-                user: 'quehui',
-                pass: 'mongo'
+                host: '**',
+                port: '**',
+                db: '**',
+                user: '**',
+                pass: '**'
             };
             redis = {
-                host: '120.27.115.24',
-                port: '6379',
+                host: '**',
+                port: '**',
                 db: 0,
-                pass: 'redis'
+                pass: '**'
             };
             github = {
-                client_id: '180b0603101d0a22aaeb',
-                client_secret: '86a6a16dc1711ae2f7d5a12babb2e3f114c9b4de',
-                redirect_url: 'http://192.168.3.109:8080/qh/auth/githubCb',
-                home_url: 'http://192.168.3.109:8080/#/home'
+                client_id: '**',
+                client_secret: '**',
+                redirect_url: '**',
+                home_url: '**'
+            };
+            qq = {
+                app_id: '**',
+                app_key: '**',
+                redirect_url: '**'
             };
             break;
     }
@@ -73,11 +59,11 @@ const configure = function () {
             upload: path.resolve(process.cwd(), 'upload')
         },
         qiniu: {
-            AK: 'UFmgpsHCF5goS2eEk3-CYiTHiF6KOqCqsi4C2R8Y',
-            SK: '40HFTpsLjHpZ-7udjoRbqI-zkiLTIrcf1jJGvAQ8',
-            bucket: '7diary',
-            domain_url: 'http://images.7diary.com/',
-            avatar_style: 'imageView2/1/w/200/h/200/interlace/0/q/100'
+            AK: '**',
+            SK: '**',
+            bucket: '**',
+            domain_url: '**',
+            avatar_style: '**'
         },
         mail: {
             notice: {
@@ -85,12 +71,13 @@ const configure = function () {
                 port: 465,
                 secureConnection: true, // 使用 SSL
                 auth: {
-                    user: 'vip@7diary.com',
-                    pass: 'qH1234567'
+                    user: '**',
+                    pass: '**'
                 }
             }
         },
         github: github,
+        qq: qq,
         https: {
             key: fs.readFileSync(path.join(__dirname, '../https/privatekey.pem')),
             cert: fs.readFileSync(path.join(__dirname, '../https/certificate.pem'))

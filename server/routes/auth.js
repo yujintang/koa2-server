@@ -20,6 +20,14 @@ router.get('/github', auth.github);
 // github回调
 router.all('/githubCb', auth.githubCb);
 
+
+/**
+ * qq 操作
+ */
+// qq登录
+router.get('/qq', auth.qq);
+// qq回调
+router.all('/qqCb', auth.qqCb);
 /**
  * 登出
  */
