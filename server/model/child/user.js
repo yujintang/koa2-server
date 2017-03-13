@@ -16,6 +16,9 @@ var UserSchema = new Schema({
     password: {
         type: String
     },
+    gender:{
+        type: String  
+    },
     email: {
         type: String
     },
@@ -26,6 +29,9 @@ var UserSchema = new Schema({
         type: String
     },
     wx_id: {
+        type: String
+    },
+    qq_id: {
         type: String
     },
     location: {
