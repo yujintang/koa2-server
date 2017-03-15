@@ -39,11 +39,9 @@ app.use(auth_check);
 var index = require('./routes/index');
 var auth = require('./routes/auth');
 var api = require('./routes/api');
-var wx = require('./routes/wx');
 router.use('/', index.routes(), index.allowedMethods());
 router.use('/auth', auth.routes(), auth.allowedMethods());
 router.use('/api', api.routes(), api.allowedMethods());
-router.use('/wx', wx.routes(), wx.allowedMethods());
 app.use(router.routes());
 
 app.listen(cfg_sys.port);

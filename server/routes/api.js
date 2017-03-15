@@ -12,6 +12,7 @@ const user = require('../controller/user');
 const product = require('../controller/product');
 const upload = require('../controller/upload');
 const banner = require('../controller/banner');
+const wx = require('../controller/wx');
 
 /**
  * 发送邮件
@@ -70,5 +71,11 @@ router.post('/auth_team', team.modify);
 router.get('/banner', banner.find);
 //修改队伍信息
 router.post('/auth_banner', banner.modify);
+
+/**
+ *  微信接口
+ */
+//接入token
+router.get('/wx', wx.token);
 
 module.exports = router;

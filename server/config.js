@@ -7,7 +7,7 @@ const configure = function () {
 
     var port,
         PROJECT_NAME = '**',
-        mongo, redis, github, qq;
+        mongo, redis, github, qq, wx;
 
     switch (process.env.NODE_ENV) {
         case 'dev':
@@ -41,6 +41,11 @@ const configure = function () {
                 app_id: '**',
                 app_key: '**',
                 redirect_url: '**'
+            };
+            wx = {
+                app_id: '**',
+                app_key: '**',
+                token: '**'
             };
             break;
     }
@@ -81,7 +86,8 @@ const configure = function () {
         https: {
             key: fs.readFileSync(path.join(__dirname, '../https/privatekey.pem')),
             cert: fs.readFileSync(path.join(__dirname, '../https/certificate.pem'))
-        }
+        },
+        wx:wx
     };
 
     //目录不存在，则创建

@@ -20,8 +20,8 @@ module.exports = function () {
     cj.MD5 = str => {
         return cryptoJs.MD5(str).toString()
     };
-    cj.SHA1 = function (text) {
-        return CryptoJS.SHA1(text).toString();
+    cj.SHA1 = text => {
+        return cryptoJs.SHA1(text).toString();
     };
     return cj;
 }();
