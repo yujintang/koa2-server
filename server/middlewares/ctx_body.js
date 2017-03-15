@@ -26,7 +26,9 @@ module.exports = async(ctx, next) => {
                 };
                 break;
             case /^(1|2|3)/.test(ctx.status) && ctx.status:
-                ctx.body = {code: 1, message: '成功! ', content: ctx.body || {}};
+                if (!notFormat(ctx.originalUrl)) {
+                    ctx.body = {code: 1, message: '成功! ', content: ctx.body || {}};
+                }
                 break;
             default:
                 ctx.body = {code: 0, message: ctx.body || '失败'};
@@ -37,3 +39,12 @@ module.exports = async(ctx, next) => {
         ctx.body = {code: 0, message: e.message}
     }
 };
+
+/**
+ * 该路由下的ctx.body 原样返回，无需经过Result包装
+ * @param route
+ * @returns {boolean}
+ */
+function notFormat(route) {
+    return ['/api/wx'].includes(route)
+}
