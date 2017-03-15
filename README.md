@@ -16,3 +16,48 @@
 
 
 如有任何问题请联系：shanquan54@163.com
+
+#### 文件目录结构
+
+```
+├── bin
+│   ├── index.js
+│   └── pm2.json
+├── https
+│   ├── certificate.pem
+│   ├── certrequest.csr
+│   └── privatekey.pem
+├── server
+│   ├── controller
+│   │   ├── auth.js
+│   │   ├── email.js
+│   │   ├── upload.js
+│   │   └── wx.js
+│   ├── init
+│   │   ├── formidable.js
+│   │   ├── log4js.js
+│   │   ├── mongoose.js
+│   │   ├── redis.js
+│   │   └── session_rds.js
+│   ├── lib
+│   │   ├── check.js
+│   │   ├── crypto.js
+│   │   ├── email.js
+│   │   └── qiniu.js
+│   ├── middlewares
+│   │   ├── auth_check.js
+│   │   ├── ctx_body.js
+│   │   └── obj_add.js
+│   ├── model
+│   │   ├── child
+│   │   │   └── file.js 
+│   │   └── index.js
+│   ├── routers
+│   │   ├── api.js
+│   │   ├── auth.js
+│   │   └── index.js
+│   ├── app.js
+│   └── config.js
+├── README.md
+└── package.json
+```
