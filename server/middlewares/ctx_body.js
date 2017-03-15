@@ -26,7 +26,7 @@ module.exports = async(ctx, next) => {
                 };
                 break;
             case /^(1|2|3)/.test(ctx.status) && ctx.status:
-                if (!notFormat(ctx.originalUrl)) {
+                if (!pureFormat(ctx.originalUrl)) {
                     ctx.body = {code: 1, message: '成功! ', content: ctx.body || {}};
                 }
                 break;
@@ -45,6 +45,7 @@ module.exports = async(ctx, next) => {
  * @param route
  * @returns {boolean}
  */
-function notFormat(route) {
-    return ['/api/wx'].includes(route)
+function pureFormat(route) {
+    let reg = /pure_/;
+    return reg.test(route)
 }

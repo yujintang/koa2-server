@@ -1,3 +1,6 @@
+/**
+ * Created by yujintang on 2017/3/15.
+ */
 'use strict';
 
 const configure = function () {
@@ -95,7 +98,7 @@ const configure = function () {
     keys.forEach(key => {
         let temp_path = config.path[key];
         fs.existsSync(temp_path) || fs.mkdirSync(temp_path)
-    })
+    });
 
     return config;
 

@@ -19,12 +19,10 @@ exports.token = async(ctx) => {
         let {signature, nonce, timestamp, echostr} = query;
         let tmpStr = [timestamp, nonce, cfg_wx.token].sort().join('');
 
-        if(signature == Crypto.SHA1(tmpStr)){
+        if (signature == Crypto.SHA1(tmpStr)) {
             ctx.body = echostr
-        }else {
-            ctx.body = false
         }
-            } catch (e) {
+    } catch (e) {
         ctx.status = 400;
         ctx.body = e.message
     }

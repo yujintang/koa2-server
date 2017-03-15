@@ -76,6 +76,6 @@ router.post('/auth_banner', banner.modify);
  *  微信接口
  */
 //接入token
-router.get('/wx', wx.token);
+router.get('/pure_wx', wx.token);
 
 module.exports = router;
