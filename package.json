@@ -19,7 +19,6 @@
   "homepage": "https://github.com/yujintang/quehui_server#readme",
   "dependencies": {
     "bluebird": "^3.4.7",
-    "crypto-js": "^3.1.9-1",
     "formidable": "^1.1.1",
     "koa": "^2.0.1",
     "koa-better-body": "^3.0.2",

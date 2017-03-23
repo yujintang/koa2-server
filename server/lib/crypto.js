@@ -7,8 +7,8 @@
  * 提供各种加解密算法
  */
 
-const uuid = require('uuid');
-const cryptoJs = require('crypto-js');
+const uuid = require('uuid'),
+    crypto = require('crypto');
 
 module.exports = function () {
 
@@ -17,11 +17,14 @@ module.exports = function () {
     cj.UUID = () => {
         return uuid.v4().replace(/[-]/g, '')
     };
-    cj.MD5 = str => {
-        return cryptoJs.MD5(str).toString()
+    cj.MD5 = text => {
+        return crypto.createHash('md5').update(text +='').digest('hex');
     };
     cj.SHA1 = text => {
-        return cryptoJs.SHA1(text).toString();
+        return crypto.createHash('sha1').update(text +='').digest('hex');
+    };
+    cj.SHA256 = text => {
+        return crypto.createHash('sha1').update(text +='').digest('hex');
     };
     return cj;
 }();
