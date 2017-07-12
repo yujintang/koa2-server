@@ -5,63 +5,30 @@
 
 const configure = function () {
 
-    const path = require('path');
-    const fs = require('fs');
+    const path = require('path'),
+    _ = require('lodash'),
+    fs = require('fs-extra');
 
-    var port,
-        PROJECT_NAME = '**',
-        mongo, redis, github, qq, wx;
-
-    switch (process.env.NODE_ENV) {
-        case 'dev':
-            port = 12312;
-            break;
-        case 'real':
-            port = 3000;
-            break;
-        default:
-            port = 12121;
-            mongo = {
-                host: '**',
-                port: '**',
-                db: '**',
-                user: '**',
-                pass: '**'
-            };
-            redis = {
-                host: '**',
-                port: '**',
-                db: 0,
-                pass: '**'
-            };
-            github = {
-                client_id: '**',
-                client_secret: '**',
-                redirect_url: '**',
-                home_url: '**'
-            };
-            qq = {
-                app_id: '**',
-                app_key: '**',
-                redirect_url: '**'
-            };
-            wx = {
-                app_id: '**',
-                app_key: '**',
-                token: '**'
-            };
-            break;
-    }
-
-    var config = {
+    let config = {
 
         system: {
-            port: process.env.PORT || port,
+            port: 3000,
             cookieKey: 'koa project',
-            PROJECT_NAME: PROJECT_NAME
+            PROJECT_NAME: 'koa2-server'
         },
-        redis: redis,
-        mongo: mongo,
+        redis: {
+            host: '127.0.0.1',
+            port: '6379',
+            db: 0,
+            pass: '123456'
+        },
+        mongo: {
+            host: '127.0.0.1',
+            port: '27017',
+            db: 'koa2',
+            user: 'test',
+            pass: '123456'
+        },
         path: {
             log_path: path.resolve(process.cwd(), 'logs'),
             upload: path.resolve(process.cwd(), 'upload')
@@ -84,24 +51,40 @@ const configure = function () {
                 }
             }
         },
-        github: github,
-        qq: qq,
+        github: {
+            client_id: '**',
+            client_secret: '**',
+            redirect_url: '**',
+            home_url: '**'
+        },
+        qq: {
+            app_id: '**',
+            app_key: '**',
+            redirect_url: '**'
+        },
         https: {
             key: fs.readFileSync(path.join(__dirname, '../https/privatekey.pem')),
             cert: fs.readFileSync(path.join(__dirname, '../https/certificate.pem'))
         },
-        wx:wx
+        wx:{
+            app_id: '**',
+            app_key: '**',
+            token: '**'
+        }
     };
 
     //目录不存在，则创建
     let keys = Object.keys(config.path);
     keys.forEach(key => {
-        let temp_path = config.path[key];
-        fs.existsSync(temp_path) || fs.mkdirSync(temp_path)
+        fs.ensureDirSync(config.path[key])
     });
 
-    return config;
+    //合并临时环境变量
+    const envJsonPath = process.cwd() + '/.env/' + 'env.json';
+    fs.ensureFileSync(envJsonPath);
+    let envConfig = fs.readJsonSync(envJsonPath, {throws: false});
 
+    return _.merge({}, config, envConfig);
 }();
 
 module.exports = configure;
