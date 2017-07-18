@@ -5,24 +5,25 @@
 
 const start_time = new Date();
 
-const Koa = require('koa');
-const https = require('https');
-const session = require('koa-session-minimal');
-const Router = require('koa-router');
-const logger = require('koa-logger');
-const body = require('koa-better-body');
+const Koa = require('koa'),
+  https = require('https'),
+  session = require('koa-session-minimal'),
+  Router = require('koa-router'),
+  logger = require('koa-logger'),
+  body = require('koa-better-body');
 
 const app = new Koa();
 const router = new Router();
 
-var config = require('./config');
-var log = require('./init/log4js');
-var mongo = require('./init/mongoose');
-var redis = require('./init/redis');
-var cfg_sys = config.system;
-var auth_check = require('./middlewares/auth_check');
-var obj_add = require('./middlewares/obj_add');
-var ctx_body = require('./middlewares/ctx_body');
+const config = require('./config'),
+  log = require('./init/log4js'),
+  mongo = require('./init/mongoose'),
+  redis = require('./init/redis'),
+  sequelize = require('./init/sequelize'),
+  cfg_sys = config.system,
+  auth_check = require('./middlewares/auth_check'),
+  obj_add = require('./middlewares/obj_add'),
+  ctx_body = require('./middlewares/ctx_body');
 
 app.keys = [cfg_sys.cookieKey];
 app.use(session(require('./init/session_rds').opt_rds));

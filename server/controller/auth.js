@@ -3,7 +3,7 @@
  */
 'use strict';
 
-const Mongo = require('../model'),
+const Mongo = global.mongoDb.models,
     Crypto = require('../lib/crypto'),
     redis = global.redisDb,
     https = require('https'),

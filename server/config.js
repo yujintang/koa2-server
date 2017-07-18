@@ -16,11 +16,27 @@ const configure = function () {
             cookieKey: 'koa project',
             PROJECT_NAME: 'koa2-server'
         },
+        sequelize: {
+            db: 'koa2',
+            user: 'postgres',
+            pass: '123456',
+            opt: {
+                timezone: '+08:00',
+                host: '127.0.0.1',
+                port: '5432',
+                dialect: 'postgres',
+                pool: {
+                    max: 5,
+                    min: 0,
+                    idle: 10000
+                }
+            }
+        },
         redis: {
             host: '127.0.0.1',
             port: '6379',
             db: 0,
-            pass: '123456'
+            // pass: '123456'
         },
         mongo: {
             host: '127.0.0.1',
@@ -31,7 +47,9 @@ const configure = function () {
         },
         path: {
             log_path: path.resolve(process.cwd(), 'logs'),
-            upload: path.resolve(process.cwd(), 'upload')
+            upload: path.resolve(process.cwd(), 'upload'),
+            mongo_model: path.resolve(process.cwd(), 'server/model/mongo'),
+            sequelize_model: path.resolve(process.cwd(), 'server/model/sequelize')
         },
         qiniu: {
             AK: '**',
@@ -80,7 +98,7 @@ const configure = function () {
     });
 
     //合并临时环境变量
-    const envJsonPath = process.cwd() + '/.env/' + 'env.json';
+    const envJsonPath = process.cwd() + '/.env/' + (process.env.NODE_ENV||'dev') + '.json';
     fs.ensureFileSync(envJsonPath);
     let envConfig = fs.readJsonSync(envJsonPath, {throws: false});
 

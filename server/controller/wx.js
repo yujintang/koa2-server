@@ -3,7 +3,7 @@
  */
 'use strict';
 
-const Mongo = require('../model'),
+const Mongo = global.mongoDb.models,
     _ = require('lodash'),
     Crypto = require('../lib/crypto'),
     ck = require('../lib/check'),

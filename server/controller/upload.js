@@ -9,7 +9,7 @@ const formidable = require('formidable'),
     path = require('path'),
     crypto = require('../lib/crypto'),
     qiniu = require('../lib/qiniu'),
-    Mongo = require('../model'),
+    Mongo = global.mongoDb.models,
     cfg_upload = global.config.path.upload;
 
 exports.upload = async(ctx) => {

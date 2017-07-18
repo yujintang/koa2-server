@@ -4,8 +4,12 @@
 
 * mongodb 做数据库
 
+* orm框架 sequelize ，可使用 mysql、postgres、sqlite、mariadb、mssql等
+
+* postgresql 关系型数据库
+
 * log4js 做日志
- z
+
 * 使用es7 async/await 语法
 
 * github, qq, weixin 等第三方接入
@@ -15,7 +19,7 @@
 * 里面包含常用资源上传，定时器，邮件发送等常用方法
 
 ###
-* config可配置,  process.cwd() 下 .env/env.json 文件，会覆盖config里面配置， 配置例如：
+* config可配置,  process.cwd() 下 .env/env.json 文件，将会merge config里面配置， 配置例如：
 ```json
 {
     "redis": {
@@ -49,6 +53,7 @@
 │   │   ├── formidable.js
 │   │   ├── log4js.js
 │   │   ├── mongoose.js
+│   │   ├── sequelize.js
 │   │   ├── redis.js
 │   │   └── session_rds.js
 │   ├── lib
@@ -61,9 +66,8 @@
 │   │   ├── ctx_body.js
 │   │   └── obj_add.js
 │   ├── model
-│   │   ├── child
-│   │   │   └── file.js 
-│   │   └── index.js
+│   │   ├── mongo
+│   │   └── sequelize
 │   ├── routers
 │   │   ├── api.js
 │   │   ├── auth.js
