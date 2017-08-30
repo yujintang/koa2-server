@@ -1,6 +1,6 @@
 ## 本脚手架 使用koa@2 redis mongodb 完成
 
-* redis 做session存储
+* redis 做缓存 存储session
 
 * mongodb 做数据库
 
